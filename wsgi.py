@@ -118,7 +118,7 @@ def hello():
 
 def worker2():
     print "Start Flask"
-    application.run()  
+    application.run(host='0.0.0.0', port=8080)  
     
 if __name__ == "__main__":
     t = threading.Thread(target=worker2)
