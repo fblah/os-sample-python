@@ -44,8 +44,8 @@ def addr2bytes(addr, nat_type_id):
 
 
 
-def worker():
-    port = 5678    
+def worker(port = 5678):
+       
     q.put("trying to open udp socket")
     sockfd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sockfd.bind(("", port))
@@ -117,13 +117,20 @@ def hello():
     return "Hello World! I am " + ip + "\n" + log
 
 def worker2():
-    print "Start Flask"
-    application.run()  
+    print "Start Flask" 
+    if(sys.argv[1]):
+        application.run(port= int(sys.argv[2]))
+    else:
+        application.run(port=5000)
     
 if __name__ == "__main__":
+    print sys.argv
     t = threading.Thread(target=worker2)
     #t.daemon = True
     t.start()
-    worker()
+    if(sys.argv[1]):
+        worker(int(sys.argv[1]))
+    else:
+        worker()
     
     q.join()
