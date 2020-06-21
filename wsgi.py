@@ -116,10 +116,14 @@ def hello():
         log += item
     return "Hello World! I am " + ip + "\n" + log
 
+def worker2():
+    print "Start Flask"
+    application.run()  
+    
 if __name__ == "__main__":
-    t = threading.Thread(target=worker)
-    t.daemon = True
+    t = threading.Thread(target=worker2)
+    #t.daemon = True
     t.start()
-    application.run()
+    worker()
     
     q.join()
