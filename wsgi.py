@@ -46,9 +46,10 @@ def addr2bytes(addr, nat_type_id):
 
 def worker():
     port = 5678    
-
+    q.put("trying to open udp socket")
     sockfd = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sockfd.bind(("", port))
+    
     q.put("listening on *:%d (udp)" % port)
 
     poolqueue = {}
